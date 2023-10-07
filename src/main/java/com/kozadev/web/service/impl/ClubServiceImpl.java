@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ClubServiceImpl implements ClubService {
-    private ClubRepository clubRepository;
+    private final ClubRepository clubRepository;
     public ClubServiceImpl(ClubRepository clubRepository){
         this.clubRepository = clubRepository;
     }
@@ -22,7 +22,7 @@ public class ClubServiceImpl implements ClubService {
     }
 
     private ClubDto mapToClubDto(Club club){
-        ClubDto clubDto = ClubDto.builder()
+        return ClubDto.builder()
                 .id(club.getId())
                 .title(club.getTitle())
                 .photoUrl(club.getPhotoUrl())
@@ -30,12 +30,11 @@ public class ClubServiceImpl implements ClubService {
                 .createdOn(club.getCreatedOn())
                 .updatedOn(club.getUpdatedOn())
                 .build();
-        return clubDto;
     }
 
     @Override
-    public Club saveClub(Club club) {
-        return clubRepository.save(club);
+    public void saveClub(Club club) {
+        clubRepository.save(club);
     }
 
     @Override
@@ -51,7 +50,7 @@ public class ClubServiceImpl implements ClubService {
     }
 
     private Club mapToClub(ClubDto club) {
-        Club clubDto = Club.builder()
+        return Club.builder()
                 .id(club.getId())
                 .title(club.getTitle())
                 .photoUrl(club.getPhotoUrl())
@@ -59,7 +58,6 @@ public class ClubServiceImpl implements ClubService {
                 .createdOn(club.getCreatedOn())
                 .updatedOn(club.getUpdatedOn())
                 .build();
-        return clubDto;
     }
 
     @Override
