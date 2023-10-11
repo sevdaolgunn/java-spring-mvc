@@ -33,7 +33,8 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public void saveClub(Club club) {
+    public void saveClub(ClubDto clubDto) {
+        Club club = mapToClub(clubDto);
         clubRepository.save(club);
     }
 
