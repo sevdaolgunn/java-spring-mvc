@@ -63,11 +63,12 @@ public class ClubServiceImpl implements ClubService {
 
     @Override
     public void delete(Long clubId) {
-
+        clubRepository.deleteById(clubId);
     }
 
     @Override
     public List<ClubDto> searchClubs(String query) {
-        return null;
+        List<Club> clubs = clubRepository.searchClubs(query);
+        return clubs.stream().map(club->mapToClubDto(club)).collect(Collectors.toList());
     }
 }
